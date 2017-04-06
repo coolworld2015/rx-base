@@ -1,5 +1,5 @@
-# RX Socket
-git clone https://github.com/coolworld2015/rx-socket.git
+# RX Base
+git clone https://github.com/coolworld2015/rx-base.git
 -------------------------------------------------------------------------------------------------
 Install only in root !!! 
 -------------------------------------------------------------------------------------------------
