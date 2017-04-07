@@ -29,7 +29,7 @@ class Phones extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
                 this.setState({
-                    items: responseData.sort(this.sort),
+                    items: (responseData.sort(this.sort)).slice(0, 10),
                     filteredClients: responseData.sort(this.sort),
                     resultsCount: responseData.length
                 });
@@ -82,7 +82,7 @@ class Phones extends Component {
 					Phones ({this.state.resultsCount})
 				</div>
 				
-                <hr/>
+ 
 				{errorCtrl}
 				
                 {this.showClients()}

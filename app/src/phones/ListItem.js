@@ -13,10 +13,11 @@ class ListItem extends Component {
 
     render() {
         return (
-			<div className="socket1" onClick={this.clickOnItem.bind(this)}>
-				{this.props.item.message}<br/>
-				<div className="span">{this.props.item.name}</div>
-				<div className="span1">{this.props.item.phone}</div>
+			<div>
+				<hr/>
+				<div className="phone" onClick={this.clickOnItem.bind(this)}>
+					{this.props.item.name} - {this.props.item.phone}
+				</div>
 			</div>
         );
     }
