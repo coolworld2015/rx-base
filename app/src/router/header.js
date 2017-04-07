@@ -12,11 +12,10 @@ class Header extends Component {
     }
 	
 	goToClient() {
-		return;
 		let item = {};
 		item.id = '555';
 		item.name = 'Coolworld';
-		hashHistory.push("/client-details/" + item.id + "/" + item.name);
+		hashHistory.push("/phone-details/" + item.id + "/" + item.name + "/" + item.name);
 	}
 	
 	render() {
