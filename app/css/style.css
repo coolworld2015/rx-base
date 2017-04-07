@@ -1,5 +1,91 @@
 body {
     background-color: black;
+	margin: 0;
+	line-height: 1.42857143;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.brandname {
+    width: 100%;
+    display: inline-block;
+    font-size: 30px;
+    background-color: #337ab7;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+	text-shadow: black 0.15em 0.15em 0.15em;
+}
+
+.route {
+	font-size: 30px;
+	color: 'white'
+}
+
+.routeSplitter {
+	margin: 0 20px 0 20px;
+}
+
+.inputarea {
+	width: 98%;
+	position: fixed;
+    top: 50px;
+}
+
+.showMessages {
+	margin-top: 150px;
+	width: 98%;
+	position: fixed;
+    top: 20px;
+    float: left;
+	overflow-y: auto;
+	max-height: 60%;
+}
+
+.loading {
+    width: 90%;
+    display: inline-block;
+    font-size: 20px;
+    background-color: #337ab7;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+	text-shadow: black 0.15em 0.15em 0.15em;
+	border-radius: 25px;
+	padding: 10px 0px 10px 0px;
+	margin-top: 30px;
+}
+
+.socket {
+    width: 90%;
+    display: inline-block;
+    font-size: 20px;
+	background-color: blue;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+	text-shadow: black 0.15em 0.15em 0.15em;
+	border-radius: 25px;
+	padding: 10px 0px 10px 0px;
+}
+
+.socket1 {
+    width: 90%;
+    display: inline-block;
+    font-size: 20px;
+    background-color: #337ab7;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+	text-shadow: black 0.15em 0.15em 0.15em;
+	border-radius: 25px;
+	padding: 10px 0px 10px 0px;
 }
 
 .header {
@@ -11,13 +97,24 @@ body {
     color: white;
     font-weight: bold;
     text-align: center;
-	text-shadow: black 0.15em 0.15em 0.15em;		
+	text-shadow: black 0.15em 0.15em 0.15em;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
-.button {
-    font-weight: bold;
-    font-size: 17px;
-    width: 46%;
+.login {
+	border-style: groove;
+    border-color: white;
+	margin-top: 10px;
+	margin: 10px 5px 0px;
+	height: 115px;
+}
+
+.splitter {
+	border-style: groove;
+    border-color: white;
+	margin-top: 10px;
+	margin-bottom: -0px;
 }
 
 .input {
@@ -26,6 +123,59 @@ body {
     color: white;
     background-color: black;
     border-style: none;
+	width: 98%;
+	height: 35px;
+	margin-top: 10px;
+	padding-left: 5px;
+}
+
+.textarea {
+	text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+    color: black;
+    background-color: cadetblue;
+    background-color: white;
+    border-style: none;
+	width: 96%;
+	height: 35px;
+	margin: 10px 0 5px 10px;
+	padding-top: 12px;
+}
+
+.span {
+    font-size: 12px;
+	margin-top: 7px;
+}
+
+.span1 {
+    font-size: 12px;
+}
+
+button:hover {
+    background: #0b5090;
+}
+
+.button {
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 17px;
+    width: 46%;
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+	background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 .readonly {
@@ -62,6 +212,7 @@ body {
     width: 150px;
     height: 150px;
 	border-radius: 20%;	
+	margin-bottom: 10px;
 }
 
 .img {
@@ -108,8 +259,9 @@ body {
     font-weight: bold;
     font-size: 16px;
     position: relative;
-    top: 5px;
+    top: 15px;
     left: 3px;
+	width: 75%;
 }
 
 .fix {
@@ -132,7 +284,7 @@ body {
     background-color: #337ab7;
 }
 
-.loading {
+.loading1 {
     position: fixed;
     top: 20px;
     height: 100%;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Router, hashHistory} from 'react-router';
 import {render} from 'react-dom';
-import routes from './routes';
+import routes from '../router/routes';
 
 class AppContainer extends Component {
 	constructor(props) {

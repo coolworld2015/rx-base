@@ -33,7 +33,11 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: 'file-loader?name=[name].[ext]'
-            }
+            },
+			{	
+				test: /\.(jp?g|png|gif|svg)$/i, 
+				loader: 'file-loader?name=[name].[ext]'
+			}
         ]
     },
     plugins: [
