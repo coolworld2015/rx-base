@@ -66,7 +66,11 @@ class Phones extends Component {
     clickHandle(item) {
         hashHistory.push("/phone-details/" + item.id + "/" + item.name + "/" + item.phone);
     }
-
+	
+	goToMain() {
+		hashHistory.push("/main");
+	}
+	
     render() {
 		var errorCtrl;
 
@@ -78,7 +82,7 @@ class Phones extends Component {
 
         return (
             <div>
-                <div className="header">
+                <div onClick={this.goToMain.bind(this)} className="brandname">
 					Phones ({this.state.resultsCount})
 				</div>
 				
