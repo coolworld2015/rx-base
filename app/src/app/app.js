@@ -18,7 +18,8 @@ class App extends Component {
                 refresh: false
             },
 			phones: {
-                refresh: false
+                refresh: true,
+				items: []
             },
 			onLogOut: this.onLogOut.bind(this),
 			socket: {

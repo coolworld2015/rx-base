@@ -8,13 +8,16 @@ class Phones extends Component {
 
         this.state = {
             name: 'CoolWorld',
-            items: [],
+            items: appConfig.phones.items.slice(0, 10),
 			resultsCount: 0
         };
     }
 	
 	componentDidMount() {
-		this.getItems();
+		if (appConfig.phones.refresh) {
+            appConfig.phones.refresh = false;
+			this.getItems();
+		}
 	}
 
     getItems() {
@@ -28,6 +31,7 @@ class Phones extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
+				appConfig.phones.items = responseData.sort(this.sort)
                 this.setState({
                     items: (responseData.sort(this.sort)).slice(0, 10),
                     filteredClients: responseData.sort(this.sort),
