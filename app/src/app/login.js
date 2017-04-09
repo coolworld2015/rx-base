@@ -6,8 +6,6 @@ class Login extends Component {
     constructor(props) {
         super(props);
 		
-
-        
 		this.state = {
             showProgress: false,
             username: '1',
@@ -84,11 +82,17 @@ class Login extends Component {
     }
 
     render() {
-        var errorCtrl;
+        var errorCtrl, loading;
 
         if (this.state.badCredentials) {
             errorCtrl = <div className="valid">
                 That username and password combination did not work.
+            </div>;
+        }
+		
+        if (this.state.showProgress) {
+            loading = <div className="loading">
+                <span>Loading...</span>
             </div>;
         }
 
@@ -138,6 +142,7 @@ class Login extends Component {
                 </div>
 				
                 {errorCtrl}
+                {loading}
 				</center>
             </div>
         )
