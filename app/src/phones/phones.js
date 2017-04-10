@@ -7,7 +7,7 @@ class Phones extends Component {
         super(props);
 
         this.state = {
-            name: 'CoolWorld',
+            showProgress: false,
             items: appConfig.phones.items.slice(0, 10),
 			resultsCount: 0
         };
@@ -21,6 +21,10 @@ class Phones extends Component {
 	}
 
     getItems() {
+		this.setState({
+            showProgress: true
+        });
+		
         fetch(appConfig.url + 'api/items/get', {			
             method: 'get',
             headers: {
@@ -35,7 +39,8 @@ class Phones extends Component {
                 this.setState({
                     items: (responseData.sort(this.sort)).slice(0, 10),
                     filteredClients: responseData.sort(this.sort),
-                    resultsCount: responseData.length
+                    resultsCount: responseData.length,
+					showProgress: false
                 });
             })
             .catch((error)=> {
@@ -76,22 +81,29 @@ class Phones extends Component {
 	}
 	
     render() {
-		var errorCtrl;
+		var errorCtrl, loading;
 
         if (this.state.serverError) {
             errorCtrl = <div>
                 Something went wrong.
             </div>;
         }
-
+		
+        if (this.state.showProgress) {
+            loading = <div className="loading">
+                <span>Loading...</span>
+            </div>;
+        }
+		
         return (
             <div>
                 <div onClick={this.goToMain.bind(this)} className="brandname">
 					Phones ({this.state.resultsCount})
 				</div>
 				
- 
 				{errorCtrl}
+				
+				{loading}
 				
                 {this.showClients()}
             </div>

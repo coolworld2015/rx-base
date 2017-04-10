@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import Title from '../app/title';
 
 class Login extends Component {
     constructor(props) {
@@ -99,15 +100,11 @@ class Login extends Component {
         return (
             <div>
 				<center>
-				<div className="brandname">RX-Base</div>
-				<div>
-					<br/>
-					<img src="./logo.jpg" className="logo"/>
-					<hr/>
-					<div className="header">Login</div>
-					<br/> 
-				</div>
+				<Title/> 
 				
+				<div className="header">Login</div>
+				<br/> 
+
 				<div className="login">
 					<div>
 						<input type="text" 
