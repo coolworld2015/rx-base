@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {hashHistory} from 'react-router';
 import ListItem from './listItem';
+import Title from '../app/title';
 
 class Phones extends Component {
     constructor(props) {
@@ -14,6 +15,10 @@ class Phones extends Component {
     }
 	
 	componentDidMount() {
+		this.setState({
+            resultsCount: appConfig.phones.items.length
+        });
+		
 		if (appConfig.phones.refresh) {
             appConfig.phones.refresh = false;
 			this.getItems();
@@ -39,7 +44,7 @@ class Phones extends Component {
                 this.setState({
                     items: (responseData.sort(this.sort)).slice(0, 10),
                     filteredClients: responseData.sort(this.sort),
-                    resultsCount: responseData.length,
+                    resultsCount: appConfig.phones.items.length,
 					showProgress: false
                 });
             })
@@ -97,12 +102,13 @@ class Phones extends Component {
 		
         return (
             <div>
-                <div onClick={this.goToMain.bind(this)} className="brandname">
+				<Title/> 
+				
+                <div className="brandname">
 					Phones ({this.state.resultsCount})
 				</div>
 				
 				{errorCtrl}
-				
 				{loading}
 				
                 {this.showClients()}

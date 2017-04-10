@@ -36,6 +36,14 @@ body {
     top: 50px;
 }
 
+.title {
+	position: fixed;
+    top: 0px;
+	width: 100%;
+	float: left;
+	margin-bottom: 200px;
+}
+
 .showMessages {
 	margin-top: 150px;
 	width: 98%;
