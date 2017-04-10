@@ -9,7 +9,7 @@ class Phones extends Component {
 
         this.state = {
             showProgress: false,
-            items: appConfig.phones.items.slice(0, 10),
+            items: appConfig.phones.items.slice(0, 20),
 			resultsCount: 0
         };
     }
@@ -42,7 +42,7 @@ class Phones extends Component {
             .then((responseData)=> {
 				appConfig.phones.items = responseData.sort(this.sort)
                 this.setState({
-                    items: (responseData.sort(this.sort)).slice(0, 10),
+                    items: (responseData.sort(this.sort)).slice(0, 20),
                     filteredClients: responseData.sort(this.sort),
                     resultsCount: appConfig.phones.items.length,
 					showProgress: false
@@ -102,7 +102,7 @@ class Phones extends Component {
 		
         return (
             <div>
-				<Title/> 
+				<Title/>
 				
                 <div className="header">
 					Phones ({this.state.resultsCount})
@@ -110,8 +110,8 @@ class Phones extends Component {
 				
 				<div>
 					<input type="text" className="search" placeholder="Search here"/>
-					<hr/>
 				</div>
+				
 				{errorCtrl}
 				{loading}
 				
