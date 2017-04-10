@@ -104,14 +104,20 @@ class Phones extends Component {
             <div>
 				<Title/> 
 				
-                <div className="brandname">
+                <div className="header">
 					Phones ({this.state.resultsCount})
 				</div>
 				
+				<div>
+					<input type="text" className="search" placeholder="Search here"/>
+					<hr/>
+				</div>
 				{errorCtrl}
 				{loading}
 				
-                {this.showClients()}
+				<div className="showMessages">
+					{this.showClients()}
+				</div>
             </div>
         )
     }

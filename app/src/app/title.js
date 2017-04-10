@@ -14,12 +14,12 @@ class Title extends Component {
 	
     render() {
         return (
-            <div className="title1" onClick={this.goToMain.bind(this)}>
+            <div>
 				<center>
 				<div className="brandname">RX-Base</div>
 				<div>
 					<br/>
-					<img src="./logo.jpg" className="logo"/>
+					<img src="./logo.jpg" onClick={this.goToMain.bind(this)} className="logo"/>
 					<hr/>
 				</div>
 				</center>

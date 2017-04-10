@@ -13,7 +13,7 @@ class ListItem extends Component {
 
     render() {
         return (
-			<div>
+			<div className="listItem">
 				<hr/>
 				<div className="phone" onClick={this.clickOnItem.bind(this)}>
 					{this.props.item.name} - {this.props.item.phone}
