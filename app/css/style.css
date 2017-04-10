@@ -111,7 +111,16 @@ body {
 	width: 100%;
 	position: fixed;
     top: 190px;
-    bottom: 50px;
+    bottom: 120px;
+	overflow-y: auto;
+	max-height: 60%;
+}
+
+.showButtons {
+	margin-top: 155px;
+	width: 100%;
+	position: fixed;
+    bottom: 20px;
 	overflow-y: auto;
 	max-height: 60%;
 }

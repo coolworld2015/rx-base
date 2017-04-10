@@ -14,11 +14,9 @@ class ListItem extends Component {
     render() {
         return (
 			<div className="listItem">
-				
 				<div className="phone" onClick={this.clickOnItem.bind(this)}>
 					{this.props.item.name} - {this.props.item.phone}
 				</div>
- 
 			</div>
         );
     }

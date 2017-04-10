@@ -50,7 +50,8 @@ class Phones extends Component {
             })
             .catch((error)=> {
                 this.setState({
-                    serverError: true
+                    serverError: true,
+					showProgress: false
                 });
             })
     }
@@ -89,8 +90,8 @@ class Phones extends Component {
 		var errorCtrl, loading;
 
         if (this.state.serverError) {
-            errorCtrl = <div>
-                Something went wrong.
+            errorCtrl = <div className="valid">
+				Something went wrong.
             </div>;
         }
 		
@@ -112,12 +113,26 @@ class Phones extends Component {
 					<input type="text" className="search" placeholder="Search here"/>
 				</div>
 				
-				{errorCtrl}
 				{loading}
 				
 				<div className="showMessages">
 					{this.showClients()}
 				</div>
+									
+				<div className="showButtons">
+					<center>
+					<hr/>
+					{errorCtrl}
+					<br/>
+					<button className="button"
+						onClick={this.goToMain.bind(this)}>
+						Back
+					</button>
+					<br/>
+					<br/>
+					</center>
+				</div>
+
             </div>
         )
     }
