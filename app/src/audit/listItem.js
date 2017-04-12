@@ -15,7 +15,7 @@ class ListItem extends Component {
         return (
 			<div className="listItem">
 				<div className="phone" onClick={this.clickOnItem.bind(this)}>
-					{this.props.item.id} - {this.props.item.id}
+					{this.props.item.name} - {this.props.item.date}
 				</div>
 			</div>
         );

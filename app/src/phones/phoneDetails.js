@@ -9,8 +9,6 @@ class PhoneDetails extends Component {
 		this.state = {
 			item: appConfig.phones.item 
 		}
-
-		console.log(this.props.routeParams);
     }
 	
 	componentDidMount() {
@@ -30,13 +28,13 @@ class PhoneDetails extends Component {
 				
 				<center>
 				<div className="brandname">
-					{this.state.item.name} <br />
-					{this.state.item.phone} <br />
-					Street: {this.state.item.street} <br />
-					House: {this.state.item.house} <br />
-					Apt: {this.state.item.apt} <br />
-					Index: {this.state.item.index} <br />
-					Id: {this.state.item.id} <br />
+					{this.state.item.name} <br/>
+					{this.state.item.phone} <br/>
+					Street: {this.state.item.street} <br/>
+					House: {this.state.item.house} <br/>
+					Apt: {this.state.item.apt} <br/>
+					Index: {this.state.item.index} <br/>
+					ID: {this.state.item.id} <br/>
  				</div>
 				
 				<div onClick={this.goPhones.bind(this)}>

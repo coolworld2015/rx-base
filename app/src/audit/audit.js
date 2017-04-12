@@ -19,7 +19,10 @@ class Audit extends Component {
             resultsCount: appConfig.audit.items.length
         });
 		
-		this.getItems();
+		if (appConfig.audit.refresh) {
+            appConfig.audit.refresh = false;
+			this.getItems();
+		}
 	}
 
     getItems() {
@@ -78,7 +81,10 @@ class Audit extends Component {
     clickHandle(item) {
 		appConfig.audit.item = {
 			id: item.id,
- 
+			name: item.name,
+			date: item.date,
+			ip: item.ip,
+			description: item.description
 		};
         hashHistory.push("/audit-item/");
     }
