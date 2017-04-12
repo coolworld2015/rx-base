@@ -198,6 +198,7 @@ button:hover {
 	display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
+	margin-right: 10px;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.42857143;

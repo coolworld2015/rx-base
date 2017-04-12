@@ -132,6 +132,11 @@ class Users extends Component {
 					<br/>
 					<button className="button"
 						onClick={this.goToMain.bind(this)}>
+						Add
+					</button>
+	
+					<button className="button"
+						onClick={this.goToMain.bind(this)}>
 						Back
 					</button>
 					<br/>

@@ -35,7 +35,17 @@ class UserDetails extends Component {
  				</div>
 				
 				<div onClick={this.goUsers.bind(this)}>
+					<hr/>
 					<br/>
+					<button className="button">
+						Submit
+					</button>					
+					
+					<button className="button">
+						Delete
+					</button>			
+					<br/>					
+					<br/>					
 					<button className="button">
 						Back
 					</button>
