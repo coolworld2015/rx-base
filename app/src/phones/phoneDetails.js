@@ -1,34 +1,49 @@
 import React, {Component} from 'react';
 import {hashHistory} from 'react-router';
+import Title from '../app/title';
 
 class PhoneDetails extends Component {
     constructor(props) {
         super(props);
+		
+		this.state = {
+			item: appConfig.phones.item 
+		}
+
 		console.log(this.props.routeParams);
     }
 	
-	goToSocket() {
+	componentDidMount() {
+		if (!appConfig.phones.item.id) {
+            hashHistory.push("/phones");
+		}
+	}
+	
+	goPhones() {
 		hashHistory.push("/phones");
 	}
 	
     render() {
         return (
 			<div>
+				<Title/>
+				
 				<center>
-				<br/>
 				<div className="brandname">
-					{this.props.routeParams.id} <br />
-					{this.props.routeParams.name}<br />
-					{this.props.routeParams.phone}
-				</div>
-				<div onClick={this.goToSocket.bind(this)}>
+					{this.state.item.name} <br />
+					{this.state.item.phone} <br />
+					Street: {this.state.item.street} <br />
+					House: {this.state.item.house} <br />
+					Apt: {this.state.item.apt} <br />
+					Index: {this.state.item.index} <br />
+					Id: {this.state.item.id} <br />
+ 				</div>
+				
+				<div onClick={this.goPhones.bind(this)}>
 					<br/>
 					<button className="button">
 						Back
 					</button>
-					<br/>
-					<br/>
-					<hr/>
 				</div>		
 				</center>				
 			</div>

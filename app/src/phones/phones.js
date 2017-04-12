@@ -79,6 +79,28 @@ class Phones extends Component {
     }
 
     clickHandle(item) {
+		appConfig.phones.item = {
+			id: item.id,
+			name: item.name,
+			phone: item.phone,
+			street: item.street,
+			house: item.house,
+			apt: item.apt,
+			index: item.index
+		};
+        hashHistory.push("/phone-item/");
+    }
+	
+    clickHandle1(item) {
+		appConfig.phones.item = {
+			id: item.id,
+			name: item.name,
+			phone: item.phone,
+			street: item.street,
+			house: item.house,
+			apt: item.apt,
+			index: item.index
+		};
         hashHistory.push("/phone-details/" + item.id + "/" + item.name + "/" + item.phone);
     }
 	

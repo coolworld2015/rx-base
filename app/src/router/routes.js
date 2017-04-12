@@ -12,6 +12,8 @@ export default (
 		<Route path="main" component={Main}/>
 		
 		<Route path="phones" component={Phones}/>
+		<Route path="phone-item" component={PhoneDetails}/>
+		
 		<Route path="phone-details">
             <Route path=":id/:name/:phone" component={PhoneDetails}/>
         </Route>
