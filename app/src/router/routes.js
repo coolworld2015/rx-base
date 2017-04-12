@@ -1,9 +1,12 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import Root from './root';
+import Main from './main';
+
 import Phones from '../phones/phones';
 import PhoneDetails from '../phones/phoneDetails';
-import Main from './main';
+
+import Audit from '../audit/audit';
 
 export default (
     <Route path="/" component={Root}>
@@ -14,8 +17,6 @@ export default (
 		<Route path="phones" component={Phones}/>
 		<Route path="phone-item" component={PhoneDetails}/>
 		
-		<Route path="phone-details">
-            <Route path=":id/:name/:phone" component={PhoneDetails}/>
-        </Route>
+		<Route path="audit" component={Audit}/>
     </Route>
 );

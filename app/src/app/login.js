@@ -58,13 +58,15 @@ class Login extends Component {
 
                 } else {
                     this.setState({
-                        badCredentials: true
+                        badCredentials: true,
+						showProgress: false
                     });
                 }
             })
             .catch((error)=> {
                 this.setState({
-                    badCredentials: true
+                    badCredentials: true,
+					showProgress: false
                 });
             })
     }

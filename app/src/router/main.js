@@ -10,8 +10,12 @@ class Main extends Component {
         super(props);
     }
 	
-	goToPhones() {
+	goPhones() {
 		hashHistory.push("/phones");
+	}	
+	
+	goAudit() {
+		hashHistory.push("/audit");
 	}
 	
 	onLogOut() {
@@ -26,10 +30,9 @@ class Main extends Component {
 
 				<div>
 					<div className="items">Search items</div><br/>
-					<div onClick={this.goToPhones.bind(this)} className="items">Phones</div><br/>
-
+					<div onClick={this.goPhones.bind(this)} className="items">Phones</div><br/>
 					<div className="items">Users</div><br/>
-					<div className="items">Audit</div><br/>
+					<div onClick={this.goAudit.bind(this)} className="items">Audit</div><br/>
 					<div onClick={this.onLogOut.bind(this)} className="items">Logout</div><br/><hr/>
 				</div>
  
