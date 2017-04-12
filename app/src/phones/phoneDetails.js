@@ -9,6 +9,8 @@ class PhoneDetails extends Component {
 		this.state = {
 			item: appConfig.phones.item 
 		}
+		
+		//console.log(this.props.routeParams);
     }
 	
 	componentDidMount() {

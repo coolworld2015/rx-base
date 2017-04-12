@@ -16,7 +16,7 @@ class App extends Component {
 			url: 'http://jwt-base.herokuapp.com/',
 			onLogOut: this.onLogOut.bind(this),
 			users: {
-                refresh: false,
+                refresh: true,
 				items: [],
 				item: {}
             },

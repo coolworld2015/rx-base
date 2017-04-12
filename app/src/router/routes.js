@@ -9,6 +9,9 @@ import PhoneDetails from '../phones/phoneDetails';
 import Audit from '../audit/audit';
 import AuditDetails from '../audit/auditDetails';
 
+import Users from '../users/users';
+import UserDetails from '../users/userDetails';
+
 export default (
     <Route path="/" component={Root}>
 	
@@ -17,6 +20,9 @@ export default (
 		
 		<Route path="phones" component={Phones}/>
 		<Route path="phone-item" component={PhoneDetails}/>
+		
+		<Route path="users" component={Users}/>
+		<Route path="user-item" component={UserDetails}/>
 		
 		<Route path="audit" component={Audit}/>
 		<Route path="audit-item" component={AuditDetails}/>
