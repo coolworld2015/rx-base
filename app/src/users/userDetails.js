@@ -22,7 +22,6 @@ class UserDetails extends Component {
 		} else {			
 			this.refs.username.value = appConfig.users.item.name;
 			this.refs.password.value = appConfig.users.item.pass;
-			this.refs.id.value = appConfig.users.item.id;
 			this.refs.description.value = appConfig.users.item.description;
 		}
 	}
@@ -74,6 +73,40 @@ class UserDetails extends Component {
             }) 
     }
 	
+    deleteItem() {
+        this.setState({
+            showProgress: true
+        });
+
+        fetch(appConfig.url + 'api/users/delete', {
+            method: 'post',
+            body: JSON.stringify({
+                id: this.state.id,
+				authorization: appConfig.access_token
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				if (responseData.text) {
+					appConfig.users.refresh = true;
+					hashHistory.push("/users");
+				} else {
+					this.setState({
+						badCredentials: true
+					});
+				}
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            }) 
+    }
+	
 	goUsers() {
 		hashHistory.push("/users");
 	}
@@ -104,16 +137,7 @@ class UserDetails extends Component {
 			<div>
 				<Title/>
 				
-				<center>
-				{/*
-				<div className="brandname">
-					Login: {this.state.item.name} <br/>
-					Password: {this.state.item.pass} <br/>
-					ID: {this.state.item.id} <br/>
-					Description: {this.state.item.description} <br/>
- 				</div>
-				*/}
-				
+				<center>				
                 <div className="header">
 					{this.state.name}
 				</div>
@@ -142,20 +166,7 @@ class UserDetails extends Component {
 								})
 							}}
 							placeholder="Password"/>
-					</div>			
-					
-					<hr className="splitter" />
-					<div>
-						<input type="text" 
-							className="input"
-							ref="id"
-							onChange={(event) => {
-								this.setState({
-									id: event.target.value,
-								})
-							}}
-							placeholder="ID"/>
-					</div>			
+					</div>		
 					
 					<hr className="splitter" />
 					<div>
@@ -182,7 +193,7 @@ class UserDetails extends Component {
 						Submit
 					</button>					
 					
-					<button className="button">
+					<button onClick={this.deleteItem.bind(this)} className="button">
 						Delete
 					</button>			
 					<br/>					

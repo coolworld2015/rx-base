@@ -1,39 +1,35 @@
-'use strict';
-
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableHighlight,
-    ListView,
-    ScrollView,
-    ActivityIndicator,
-    TextInput,
-	BackAndroid
-} from 'react-native';
+import {hashHistory} from 'react-router';
+import Title from '../app/title';
 
 class UserAdd extends Component {
     constructor(props) {
         super(props);
 		
-		BackAndroid.addEventListener('hardwareBackPress', () => {
-			if (this.props.navigator) {
-				this.props.navigator.pop();
-			}
-			return true;
-		});
+		this.state = {
+			invalidValue: false
+		}
 		
-        this.state = {
-            showProgress: false,
-			bugANDROID: ''
-        }
     }
+	
+	componentDidMount() {
+		if (appConfig.users.items.length < 1) {
+            hashHistory.push("/users");
+		} else {
+			/*
+			this.refs.username.value = appConfig.users.item.name;
+			this.refs.password.value = appConfig.users.item.pass;
+			this.refs.id.value = appConfig.users.item.id;
+			this.refs.description.value = appConfig.users.item.description;
+			*/
+		}
+	}
 
     addItem() {
-        if (this.state.name == undefined ||
-            this.state.pass == undefined ||
-            this.state.description == undefined) {
+        if (this.state.name == '' || this.state.name == undefined ||
+            this.state.pass == '' || this.state.pass == undefined ||
+            this.state.description == '' || 
+			this.state.description == undefined) {
             this.setState({
                 invalidValue: true
             });
@@ -41,10 +37,9 @@ class UserAdd extends Component {
         }
 
         this.setState({
-            showProgress: true,
-			bugANDROID: ' '
+            showProgress: true
         });
-		
+
         fetch(appConfig.url + 'api/users/add', {
             method: 'post',
             body: JSON.stringify({
@@ -61,213 +56,119 @@ class UserAdd extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-                appConfig.users.refresh = true;
-                this.props.navigator.pop();
+				if (responseData.pass) {
+					appConfig.users.refresh = true;
+					hashHistory.push("/users");
+				} else {
+					this.setState({
+						badCredentials: true
+					});
+				}
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
-            })
-            .finally(()=> {
-                this.setState({
-                    showProgress: false
-                });
-            });
+            }) 
     }
 	
-	goBack() {
-		this.props.navigator.pop();
+	goUsers() {
+		hashHistory.push("/users");
 	}
 	
     render() {
-        var errorCtrl, validCtrl;
+        var errorCtrl, validCtrl, loading;
 
         if (this.state.serverError) {
-            errorCtrl = <Text style={styles.error}>
-							Something went wrong.
-						</Text>;
+            errorCtrl = <div className="valid">
+				Something went wrong.
+			</div>;
         }
-
+		
         if (this.state.invalidValue) {
-            validCtrl = <Text style={styles.error}>
-							Value required - please provide.
-						</Text>;
+            validCtrl = <div className="valid">
+				Value required - please provide.
+				<br/><br/>
+			</div>;
         }
-
-        return (
-            <View style={styles.container}>
-				<View style={styles.header}>
-					<View>
-						<TouchableHighlight
-							onPress={()=> this.goBack()}
-							underlayColor='#ddd'
-						>
-							<Text style={styles.textSmall}>
-								Back
-							</Text>
-						</TouchableHighlight>	
-					</View>
-					<View>
-						<TouchableHighlight
-							underlayColor='#ddd'
-						>
-							<Text style={styles.textLarge}>
-								New record
-							</Text>
-						</TouchableHighlight>	
-					</View>						
-					<View>
-						<TouchableHighlight
-							underlayColor='#ddd'
-						>
-							<Text style={styles.textSmall}>
-							</Text>
-						</TouchableHighlight>	
-					</View>
-				</View>
 				
-				<ScrollView>
-					<View style={styles.form}>
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								name: text,
-								invalidValue: false
-							})}
-							style={styles.formInput}
-							value={this.state.name}
-							placeholder='Login'>
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								pass: text,
-								invalidValue: false
-							})}
-							style={styles.formInput}
-							value={this.state.pass}
-							placeholder='Password'>
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							multiline={true}
-							onChangeText={(text)=> this.setState({
-								description: text,
-								invalidValue: false
-							})}
-							style={styles.formInputArea}
-							value={this.state.description}
-							placeholder='Description'>
-						</TextInput>
-
-						{validCtrl}
-
-						<TouchableHighlight
-							onPress={()=> this.addItem()}
-							style={styles.button}>
-							<Text style={styles.buttonText}>
-								Add
-							</Text>
-						</TouchableHighlight>
-
-						{errorCtrl}
-
-						<ActivityIndicator
-							animating={this.state.showProgress}
-							size="large"
-							style={styles.loader}
-						/>
-						
-						<Text>{this.state.bugANDROID}</Text>
-					</View>
-				</ScrollView>
-			</View>
-        )
+        if (this.state.showProgress) {
+            loading = <div className="loading">
+                <span>Loading...</span>
+            </div>;
+        }
+		
+        return (
+			<div>
+				<Title/>
+				
+				<center>		
+                <div className="header">
+					New record
+				</div>
+				
+				<div className="form">
+					<div>
+						<input type="text" 
+							className="input"
+							ref="username"
+							onChange={(event) => {
+								this.setState({
+									name: event.target.value,
+									invalidValue: false
+								})
+							}}
+							placeholder="Login"/>
+					</div>
+					
+					<hr className="splitter" />
+					<div>
+						<input type="text" 
+							className="input"
+							ref="password"
+							onChange={(event) => {
+								this.setState({
+									pass: event.target.value,
+									invalidValue: false
+								})
+							}}
+							placeholder="Password"/>
+					</div>		
+					
+					<hr className="splitter" />
+					<div>
+						<input type="text" 
+							className="input"
+							ref="description"
+							onChange={(event) => {
+								this.setState({
+									description: event.target.value,
+									invalidValue: false
+								})
+							}}
+							placeholder="Description"/>
+					</div>
+				</div>
+				
+				{errorCtrl}
+				{loading}
+				
+				<div>
+					<br/>
+					{validCtrl}
+					
+					<button onClick={this.addItem.bind(this)} className="button">
+						Submit
+					</button>					
+ 				
+					<button onClick={this.goUsers.bind(this)} className="button">
+						Back
+					</button>
+				</div>		
+				</center>				
+			</div>
+        );
     }
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1, 
-		justifyContent: 'center', 
-		backgroundColor: 'white'
-	},		
-	header: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		backgroundColor: '#48BBEC',
-		borderWidth: 0,
-		borderColor: 'whitesmoke'
-	},	
-	textSmall: {
-		fontSize: 16,
-		textAlign: 'center',
-		margin: 14,
-		fontWeight: 'bold',
-		color: 'white'
-	},		
-	textLarge: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10,
-		marginRight: 40,
-		fontWeight: 'bold',
-		color: 'white'
-	},	
-    form: {
-		flex: 1,
-		padding: 10,
-		justifyContent: 'flex-start',
-		paddingBottom: 130,
-		backgroundColor: 'white'
-    },    
-	formInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black'
-    },
-	formInputArea: {
-        height: 100,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black'
-    },	
-    button: {
-        height: 50,
-        backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
-        alignSelf: 'stretch',
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 20,
-		fontWeight: 'bold'
-    },
-    loader: {
-        marginTop: 20
-    },
-    error: {
-        color: 'red',
-        paddingTop: 10,
-        textAlign: 'center'
-    }
-});
 
 export default UserAdd;

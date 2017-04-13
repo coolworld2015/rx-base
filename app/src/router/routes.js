@@ -11,6 +11,7 @@ import AuditDetails from '../audit/auditDetails';
 
 import Users from '../users/users';
 import UserDetails from '../users/userDetails';
+import UserAdd from '../users/userAdd';
 
 export default (
     <Route path="/" component={Root}>
@@ -23,6 +24,7 @@ export default (
 		
 		<Route path="users" component={Users}/>
 		<Route path="user-item" component={UserDetails}/>
+		<Route path="user-add" component={UserAdd}/>
 		
 		<Route path="audit" component={Audit}/>
 		<Route path="audit-item" component={AuditDetails}/>

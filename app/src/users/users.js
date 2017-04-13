@@ -87,6 +87,10 @@ class Users extends Component {
 		};
         hashHistory.push("/user-item/");
     }
+    
+	goAdd() {
+        hashHistory.push("/user-add/");
+    }
 	
 	goToMain() {
 		hashHistory.push("/main");
@@ -131,7 +135,7 @@ class Users extends Component {
 					{errorCtrl}
 					<br/>
 					<button className="button"
-						onClick={this.goToMain.bind(this)}>
+						onClick={this.goAdd.bind(this)}>
 						Add
 					</button>
 	
