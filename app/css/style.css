@@ -147,6 +147,13 @@ body {
 	height: 115px;
 }
 
+.form {
+	border-style: groove;
+    border-color: white;
+	margin-top: 10px;
+	margin: 10px 5px 0px;
+}
+
 .splitter {
 	border-style: groove;
     border-color: white;
