@@ -7,7 +7,11 @@ class UserDetails extends Component {
         super(props);
 		
 		this.state = {
-			item: appConfig.users.item 
+			name: appConfig.users.item.name,
+			pass: appConfig.users.item.pass,
+			id: appConfig.users.item.id,
+			description: appConfig.users.item.description,
+			invalidValue: false
 		}
 		
     }
@@ -15,19 +19,87 @@ class UserDetails extends Component {
 	componentDidMount() {
 		if (!appConfig.users.item.id) {
             hashHistory.push("/users");
-		} else {
+		} else {			
 			this.refs.username.value = appConfig.users.item.name;
 			this.refs.password.value = appConfig.users.item.pass;
 			this.refs.id.value = appConfig.users.item.id;
 			this.refs.description.value = appConfig.users.item.description;
 		}
 	}
+
+    updateItem() {
+        if (this.state.name == '' || this.state.name == undefined ||
+            this.state.pass == '' || this.state.pass == undefined ||
+            this.state.description == '' || 
+			this.state.description == undefined) {
+            this.setState({
+                invalidValue: true
+            });
+            return;
+        }
+
+        this.setState({
+            showProgress: true
+        });
+
+        fetch(appConfig.url + 'api/users/update', {
+            method: 'post',
+            body: JSON.stringify({
+                id: this.state.id,
+                name: this.state.name,
+                pass: this.state.pass,
+                description: this.state.description,
+				authorization: appConfig.access_token
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				if (responseData.pass) {
+					appConfig.users.refresh = true;
+					hashHistory.push("/users");
+				} else {
+					this.setState({
+						badCredentials: true
+					});
+				}
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            }) 
+    }
 	
 	goUsers() {
 		hashHistory.push("/users");
 	}
 	
     render() {
+        var errorCtrl, validCtrl, loading;
+
+        if (this.state.serverError) {
+            errorCtrl = <div className="valid">
+				Something went wrong.
+			</div>;
+        }
+		
+        if (this.state.invalidValue) {
+            validCtrl = <div className="valid">
+				Value required - please provide.
+				<br/><br/>
+			</div>;
+        }
+				
+        if (this.state.showProgress) {
+            loading = <div className="loading">
+                <span>Loading...</span>
+            </div>;
+        }
+		
         return (
 			<div>
 				<Title/>
@@ -43,7 +115,7 @@ class UserDetails extends Component {
 				*/}
 				
                 <div className="header">
-					{this.state.item.name}
+					{this.state.name}
 				</div>
 				
 				<div className="form">
@@ -66,7 +138,7 @@ class UserDetails extends Component {
 							ref="password"
 							onChange={(event) => {
 								this.setState({
-									password: event.target.value,
+									pass: event.target.value,
 								})
 							}}
 							placeholder="Password"/>
@@ -99,9 +171,14 @@ class UserDetails extends Component {
 					</div>
 				</div>
 				
-				<div onClick={this.goUsers.bind(this)}>
+				{errorCtrl}
+				{loading}
+				
+				<div>
 					<br/>
-					<button className="button">
+					{validCtrl}
+					
+					<button onClick={this.updateItem.bind(this)} className="button">
 						Submit
 					</button>					
 					
@@ -110,7 +187,7 @@ class UserDetails extends Component {
 					</button>			
 					<br/>					
 					<br/>					
-					<button className="button">
+					<button onClick={this.goUsers.bind(this)} className="button">
 						Back
 					</button>
 				</div>		
