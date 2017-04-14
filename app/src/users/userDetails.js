@@ -73,39 +73,9 @@ class UserDetails extends Component {
             }) 
     }
 	
-    deleteItem() {
-        this.setState({
-            showProgress: true
-        });
-
-        fetch(appConfig.url + 'api/users/delete', {
-            method: 'post',
-            body: JSON.stringify({
-                id: this.state.id,
-				authorization: appConfig.access_token
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response)=> response.json())
-            .then((responseData)=> {
-				if (responseData.text) {
-					appConfig.users.refresh = true;
-					hashHistory.push("/users");
-				} else {
-					this.setState({
-						badCredentials: true
-					});
-				}
-            })
-            .catch((error)=> {
-                this.setState({
-                    serverError: true
-                });
-            }) 
-    }
+	goDelete() {
+		hashHistory.push("/user-delete/" + this.state.id + "/" + this.state.name);
+	}
 	
 	goUsers() {
 		hashHistory.push("/users");
@@ -193,7 +163,7 @@ class UserDetails extends Component {
 						Submit
 					</button>					
 					
-					<button onClick={this.deleteItem.bind(this)} className="button">
+					<button onClick={this.goDelete.bind(this)} className="button">
 						Delete
 					</button>			
 					<br/>					

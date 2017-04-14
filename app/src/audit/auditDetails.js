@@ -36,11 +36,13 @@ class AuditDetails extends Component {
 				
 				<center>
 				<div className="brandname">
-					Login: {this.state.item.name} <br/>
+					<hr/>
+					User: {this.state.item.name} <br/>
 					{this.state.item.date} <br/>
 					IP: {this.state.ip} <br/>
 					Description: {this.state.item.description} <br/>
 					ID: {this.state.item.id} <br/>
+					<hr/>
  				</div>
 				
 				<div onClick={this.goPhones.bind(this)}>

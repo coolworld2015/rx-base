@@ -85,7 +85,7 @@ class Users extends Component {
 			pass: item.pass,
 			description: item.description
 		};
-        hashHistory.push("/user-item/");
+        hashHistory.push("/user-details/");
     }
     
 	goAdd() {

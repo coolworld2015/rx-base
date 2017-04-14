@@ -86,7 +86,7 @@ class Audit extends Component {
 			ip: item.ip,
 			description: item.description
 		};
-        hashHistory.push("/audit-item/");
+        hashHistory.push("/audit-details/");
     }
 	
 	goToMain() {

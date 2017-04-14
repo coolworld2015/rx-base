@@ -30,6 +30,7 @@ class PhoneDetails extends Component {
 				
 				<center>
 				<div className="brandname">
+					<hr/>
 					{this.state.item.name} <br/>
 					{this.state.item.phone} <br/>
 					Street: {this.state.item.street} <br/>
@@ -37,6 +38,7 @@ class PhoneDetails extends Component {
 					Apt: {this.state.item.apt} <br/>
 					Index: {this.state.item.index} <br/>
 					ID: {this.state.item.id} <br/>
+					<hr/>
  				</div>
 				
 				<div onClick={this.goPhones.bind(this)}>

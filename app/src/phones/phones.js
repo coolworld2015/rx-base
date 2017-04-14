@@ -88,7 +88,7 @@ class Phones extends Component {
 			apt: item.apt,
 			index: item.index
 		};
-        hashHistory.push("/phone-item/");
+        hashHistory.push("/phone-details/");
     }
 	
     clickHandle1(item) {
