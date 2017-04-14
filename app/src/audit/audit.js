@@ -87,7 +87,7 @@ class Audit extends Component {
 		return 0;
 	};
 		
-    showClients() {
+    makeItems() {
         return this.state.items.map((item) => {
             return (
                 <ListItem
@@ -143,7 +143,7 @@ class Audit extends Component {
 				{loading}
 				
 				<div onScroll={this.handleScroll.bind(this)} className="showMessages">
-					{this.showClients()}
+					{this.makeItems()}
 				</div>
 									
 				<div className="showButtons">

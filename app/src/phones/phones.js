@@ -87,7 +87,7 @@ class Phones extends Component {
 		return 0;
 	};
 		
-    showClients() {
+    makeItems() {
         return this.state.items.map((item) => {
             return (
                 <ListItem
@@ -109,19 +109,6 @@ class Phones extends Component {
 			index: item.index
 		};
         hashHistory.push("/phone-details/");
-    }
-	
-    clickHandle1(item) {
-		appConfig.phones.item = {
-			id: item.id,
-			name: item.name,
-			phone: item.phone,
-			street: item.street,
-			house: item.house,
-			apt: item.apt,
-			index: item.index
-		};
-        hashHistory.push("/phone-details/" + item.id + "/" + item.name + "/" + item.phone);
     }
 	
 	goToMain() {
@@ -158,7 +145,7 @@ class Phones extends Component {
 				{loading}
 				
 				<div onScroll={this.handleScroll.bind(this)} className="showMessages">
-					{this.showClients()}
+					{this.makeItems()}
 				</div>
 									
 				<div className="showButtons">
