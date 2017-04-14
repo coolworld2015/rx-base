@@ -10,7 +10,9 @@ class Users extends Component {
         this.state = {
             showProgress: false,
             items: appConfig.users.items.slice(0, 20),
-			resultsCount: 0
+			resultsCount: 0,
+            recordsCount: 25,
+            positionY: 0
         };
     }
 	
@@ -24,7 +26,25 @@ class Users extends Component {
 			this.getItems();
 		}
 	}
-
+	
+	handleScroll() {
+		var position = document.querySelector('.showMessages').scrollTop;
+        var items, positionY, recordsCount;
+        recordsCount = this.state.recordsCount;
+        positionY = this.state.positionY;
+		items = appConfig.users.items.slice(0, recordsCount);
+		
+		if (position > positionY) {
+			console.log(items.length);
+			console.log(position);
+            this.setState({
+                items: items,
+                recordsCount: recordsCount + 20,
+                positionY: positionY + 1000
+            });
+        }
+	}
+	
     getItems() {
 		this.setState({
             showProgress: true
@@ -125,7 +145,7 @@ class Users extends Component {
 				
 				{loading}
 				
-				<div className="showMessages">
+				<div onScroll={this.handleScroll.bind(this)} className="showMessages">
 					{this.showClients()}
 				</div>
 									
