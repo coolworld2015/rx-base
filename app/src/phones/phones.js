@@ -10,10 +10,12 @@ class Phones extends Component {
         this.state = {
             showProgress: false,
             items: appConfig.phones.items.slice(0, 20),
-			resultsCount: 0
+			resultsCount: 0,
+            recordsCount: 25,
+            positionY: 0
         };
     }
-	
+
 	componentDidMount() {
 		this.setState({
             resultsCount: appConfig.phones.items.length
@@ -24,7 +26,25 @@ class Phones extends Component {
 			this.getItems();
 		}
 	}
-
+	
+	handleScroll() {
+		var position = document.querySelector('.showMessages').scrollTop;
+        var items, positionY, recordsCount;
+        recordsCount = this.state.recordsCount;
+        positionY = this.state.positionY;
+		items = appConfig.phones.items.slice(0, recordsCount);
+		
+		if (position > positionY) {
+			console.log(items.length);
+			console.log(position);
+            this.setState({
+                items: items,
+                recordsCount: recordsCount + 20,
+                positionY: positionY + 1000
+            });
+        }
+	}
+	
     getItems() {
 		this.setState({
             showProgress: true
@@ -137,7 +157,7 @@ class Phones extends Component {
 				
 				{loading}
 				
-				<div className="showMessages">
+				<div onScroll={this.handleScroll.bind(this)} className="showMessages">
 					{this.showClients()}
 				</div>
 									
