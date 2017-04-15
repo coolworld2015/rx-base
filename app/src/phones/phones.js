@@ -98,6 +98,18 @@ class Phones extends Component {
         })
     }
 
+    onChangeText(e) {
+		var text = e.target.value;
+        var arr = [].concat(appConfig.phones.items);
+        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        this.setState({
+            items: items,
+            resultsCount: items.length,
+            filteredItems: items,
+            searchQuery: text
+        })
+    }
+	
     clickHandle(item) {
 		appConfig.phones.item = {
 			id: item.id,
@@ -139,7 +151,10 @@ class Phones extends Component {
 				</div>
 				
 				<div>
-					<input type="text" className="search" placeholder="Search here"/>
+					<input type="text" className="search" 
+						onChange={this.onChangeText.bind(this)}
+						placeholder="Search here"
+					/>
 				</div>
 				
 				{loading}
