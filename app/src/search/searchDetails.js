@@ -7,18 +7,18 @@ class PhoneDetails extends Component {
         super(props);
 		
 		this.state = {
-			item: appConfig.phones.item 
+			item: appConfig.search.item 
 		}
     }
 	
 	componentDidMount() {
-		if (!appConfig.phones.item.id) {
-            hashHistory.push("/phones");
+		if (!appConfig.search.item.id) {
+            hashHistory.push("/search");
 		}
 	}
 	
 	goPhones() {
-		hashHistory.push("/phones");
+		hashHistory.goBack();
 	}
 	
     render() {

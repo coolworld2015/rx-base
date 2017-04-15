@@ -15,6 +15,11 @@ class App extends Component {
             access_token: '',
 			url: 'http://jwt-base.herokuapp.com/',
 			onLogOut: this.onLogOut.bind(this),
+			search: {
+                refresh: true,
+				items: [],
+				item: {}
+            },			
 			users: {
                 refresh: true,
 				items: [],
