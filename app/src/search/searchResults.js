@@ -11,6 +11,7 @@ class SearchResults extends Component {
 			searchQueryHttp: this.props.routeParams.name,
 			searchType: this.props.routeParams.type,
             items: appConfig.search.items.slice(0, 20),
+			filteredItems: appConfig.search.items,
 			resultsCount: 0,
             recordsCount: 25,
             positionY: 0
@@ -34,7 +35,7 @@ class SearchResults extends Component {
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount;
         positionY = this.state.positionY;
-		items = appConfig.search.items.slice(0, recordsCount);
+		items = this.state.filteredItems.slice(0, recordsCount);
 		
 		if (position > positionY) {
 			console.log(items.length);
@@ -45,6 +46,29 @@ class SearchResults extends Component {
                 positionY: positionY + 1000
             });
         }
+	}
+
+    onChangeText(e) {
+		var text = e.target.value;
+        var arr = [].concat(appConfig.search.items);
+        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        this.setState({
+            items: items,
+            resultsCount: items.length,
+            filteredItems: items,
+            searchQuery: text
+        })
+    }
+		
+	clearSearchQuery() {
+		this.refs.search.value = '';
+		this.setState({
+			items: appConfig.search.items.slice(0, 25),
+            resultsCount: appConfig.search.items.length,
+            filteredItems: appConfig.search.items,
+			positionY: 0,
+			recordsCount: 25
+		});
 	}
 	
     findByPhone() {
@@ -69,7 +93,7 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				appConfig.search.items = responseData.sort(this.sort)
+				appConfig.search.items = responseData.sort(this.sort);
                 this.setState({
                     items: (responseData.sort(this.sort)).slice(0, 20),
                     filteredItems: responseData.sort(this.sort),
@@ -105,18 +129,6 @@ class SearchResults extends Component {
                     item={item}
                     clickHandle={this.clickHandle.bind(this)}/>
             )
-        })
-    }
-
-    onChangeText(e) {
-		var text = e.target.value;
-        var arr = [].concat(appConfig.search.items);
-        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
-        this.setState({
-            items: items,
-            resultsCount: items.length,
-            filteredItems: items,
-            searchQuery: text
         })
     }
 	
@@ -156,12 +168,13 @@ class SearchResults extends Component {
             <div>
 				<Title/>
 				
-                <div className="header">
+                <div className="header" onClick={this.clearSearchQuery.bind(this)}>
 					{this.state.searchQueryHttp} ({this.state.resultsCount})
 				</div>
 				
 				<div>
-					<input type="text" className="search" 
+					<input type="text" className="search"
+						ref="search"
 						onChange={this.onChangeText.bind(this)}
 						placeholder="Search here"
 					/>

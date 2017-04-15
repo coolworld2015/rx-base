@@ -10,6 +10,7 @@ class Users extends Component {
         this.state = {
             showProgress: false,
             items: appConfig.users.items.slice(0, 20),
+			filteredItems: appConfig.users.items,
 			resultsCount: 0,
             recordsCount: 25,
             positionY: 0
@@ -32,7 +33,7 @@ class Users extends Component {
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount;
         positionY = this.state.positionY;
-		items = appConfig.users.items.slice(0, recordsCount);
+		items = this.state.filteredItems.slice(0, recordsCount);
 		
 		if (position > positionY) {
 			console.log(items.length);
@@ -43,6 +44,29 @@ class Users extends Component {
                 positionY: positionY + 1000
             });
         }
+	}
+	
+    onChangeText(e) {
+		var text = e.target.value;
+        var arr = [].concat(appConfig.users.items);
+        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        this.setState({
+            items: items,
+            resultsCount: items.length,
+            filteredItems: items,
+            searchQuery: text
+        })
+    }
+		
+	clearSearchQuery() {
+		this.refs.search.value = '';
+		this.setState({
+			items: appConfig.users.items.slice(0, 25),
+            resultsCount: appConfig.users.items.length,
+            filteredItems: appConfig.users.items,
+			positionY: 0,
+			recordsCount: 25
+		});
 	}
 	
     getItems() {
@@ -60,10 +84,10 @@ class Users extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				appConfig.users.items = responseData.sort(this.sort)
+				appConfig.users.items = responseData.sort(this.sort);
                 this.setState({
                     items: (responseData.sort(this.sort)).slice(0, 20),
-                    filteredClients: responseData.sort(this.sort),
+                    filteredItems: responseData.sort(this.sort),
                     resultsCount: appConfig.users.items.length,
 					showProgress: false
                 });
@@ -98,18 +122,6 @@ class Users extends Component {
         })
     }
 
-    onChangeText(e) {
-		var text = e.target.value;
-        var arr = [].concat(appConfig.users.items);
-        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
-        this.setState({
-            items: items,
-            resultsCount: items.length,
-            filteredItems: items,
-            searchQuery: text
-        })
-    }
-	
     clickHandle(item) {
 		appConfig.users.item = {
 			id: item.id,
@@ -147,12 +159,13 @@ class Users extends Component {
             <div>
 				<Title/>
 				
-                <div className="header">
+                <div className="header" onClick={this.clearSearchQuery.bind(this)}>
 					Users ({this.state.resultsCount})
 				</div>
 				
 				<div>
-					<input type="text" className="search" 
+					<input type="text" className="search"
+						ref="search"
 						onChange={this.onChangeText.bind(this)}
 						placeholder="Search here"
 					/>

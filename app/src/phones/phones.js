@@ -10,6 +10,7 @@ class Phones extends Component {
         this.state = {
             showProgress: false,
             items: appConfig.phones.items.slice(0, 20),
+			filteredItems: appConfig.phones.items,
 			resultsCount: 0,
             recordsCount: 25,
             positionY: 0
@@ -32,7 +33,7 @@ class Phones extends Component {
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount;
         positionY = this.state.positionY;
-		items = appConfig.phones.items.slice(0, recordsCount);
+		items = this.state.filteredItems.slice(0, recordsCount);
 		
 		if (position > positionY) {
 			console.log(items.length);
@@ -43,6 +44,29 @@ class Phones extends Component {
                 positionY: positionY + 1000
             });
         }
+	}
+	
+    onChangeText(e) {
+		var text = e.target.value;
+        var arr = [].concat(appConfig.phones.items);
+        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        this.setState({
+            items: items.slice(0, 25),
+            resultsCount: items.length,
+            filteredItems: items,
+            searchQuery: text
+        })
+    }
+		
+	clearSearchQuery() {
+		this.refs.search.value = '';
+		this.setState({
+			items: appConfig.phones.items.slice(0, 25),
+            resultsCount: appConfig.phones.items.length,
+            filteredItems: appConfig.phones.items,
+			positionY: 0,
+			recordsCount: 25
+		});
 	}
 	
     getItems() {
@@ -60,10 +84,10 @@ class Phones extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				appConfig.phones.items = responseData.sort(this.sort)
+				appConfig.phones.items = responseData.sort(this.sort);
                 this.setState({
                     items: (responseData.sort(this.sort)).slice(0, 20),
-                    filteredClients: responseData.sort(this.sort),
+                    filteredItems: responseData.sort(this.sort),
                     resultsCount: appConfig.phones.items.length,
 					showProgress: false
                 });
@@ -98,18 +122,6 @@ class Phones extends Component {
         })
     }
 
-    onChangeText(e) {
-		var text = e.target.value;
-        var arr = [].concat(appConfig.phones.items);
-        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
-        this.setState({
-            items: items,
-            resultsCount: items.length,
-            filteredItems: items,
-            searchQuery: text
-        })
-    }
-	
     clickHandle(item) {
 		appConfig.phones.item = {
 			id: item.id,
@@ -146,12 +158,13 @@ class Phones extends Component {
             <div>
 				<Title/>
 				
-                <div className="header">
+                <div className="header" onClick={this.clearSearchQuery.bind(this)}>
 					Phones ({this.state.resultsCount})
 				</div>
 				
 				<div>
-					<input type="text" className="search" 
+					<input type="text" className="search"
+						ref="search"
 						onChange={this.onChangeText.bind(this)}
 						placeholder="Search here"
 					/>
