@@ -34,10 +34,12 @@ class Main extends Component {
 		return (
 			<div>
 				<center>
-				<Title/> 
+				<div className="header">
+					Main
+				</div>
 
 				<div>
-					<hr className="hrSplitter"/>
+					<br/>
 					<div onClick={this.goSearch.bind(this)} className="items">Search</div><br/>
 					<div onClick={this.goPhones.bind(this)} className="items">Phones</div><br/>
 					<div onClick={this.goUsers.bind(this)} className="items">Users</div><br/>

@@ -65,6 +65,19 @@ class Search extends Component {
 				
 				<div className="form">
 					<div>
+						<select className="input"
+							onChange={(event) => {
+								this.setState({
+									type: event.target.value,
+									invalidValue: false
+								})
+							}}>
+							<option value="Search by phone">Search by phone</option>
+							<option value="Search by name">Search by name</option>
+						</select>
+					</div>					
+					<hr className="splitter" />
+					<div>
 						<input type="text" 
 							className="input"
 							ref="username"
@@ -76,8 +89,6 @@ class Search extends Component {
 							}}
 							placeholder="Search"/>
 					</div>
- 	
- 
 				</div>
 				
 				{errorCtrl}
