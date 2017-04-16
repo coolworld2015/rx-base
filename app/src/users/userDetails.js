@@ -105,8 +105,6 @@ class UserDetails extends Component {
 		
         return (
 			<div>
-				<Title/>
-				
 				<center>				
                 <div className="header">
 					{this.state.name}

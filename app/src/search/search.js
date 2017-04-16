@@ -57,9 +57,7 @@ class Search extends Component {
         }
 		
         return (
-			<div>
-				<Title/>
-				
+			<div>				
 				<center>		
                 <div className="header">
 					Search

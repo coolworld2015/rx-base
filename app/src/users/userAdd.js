@@ -100,8 +100,6 @@ class UserAdd extends Component {
 		
         return (
 			<div>
-				<Title/>
-				
 				<center>		
                 <div className="header">
 					New record

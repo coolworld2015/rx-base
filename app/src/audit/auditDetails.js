@@ -32,8 +32,6 @@ class AuditDetails extends Component {
     render() {
         return (
 			<div>
-				<Title/>
-				
 				<center>
 				<div className="brandname">
 					<hr/>

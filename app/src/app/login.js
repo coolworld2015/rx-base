@@ -119,7 +119,7 @@ class Login extends Component {
 							}}
 							placeholder="Login"/>
 					</div>
-					<hr className="splitter" />
+					<hr className="splitter"/>
 					<div>
 						<input type="password" 
 							className="input"

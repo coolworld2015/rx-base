@@ -12,7 +12,7 @@ class Users extends Component {
             items: appConfig.users.items.slice(0, 20),
 			filteredItems: appConfig.users.items,
 			resultsCount: 0,
-            recordsCount: 25,
+            recordsCount: 20,
             positionY: 0
         };
     }
@@ -40,8 +40,8 @@ class Users extends Component {
 			console.log(position);
             this.setState({
                 items: items,
-                recordsCount: recordsCount + 20,
-                positionY: positionY + 1000
+                recordsCount: recordsCount + 10,
+                positionY: positionY + 500
             });
         }
 	}
@@ -61,11 +61,11 @@ class Users extends Component {
 	clearSearchQuery() {
 		this.refs.search.value = '';
 		this.setState({
-			items: appConfig.users.items.slice(0, 25),
+			items: appConfig.users.items.slice(0, 20),
             resultsCount: appConfig.users.items.length,
             filteredItems: appConfig.users.items,
 			positionY: 0,
-			recordsCount: 25
+			recordsCount: 20
 		});
 	}
 	
@@ -157,27 +157,28 @@ class Users extends Component {
 		
         return (
             <div>
-				<Title/>
-				
-                <div className="header" onClick={this.clearSearchQuery.bind(this)}>
-					Users ({this.state.resultsCount})
-				</div>
-				
-				<div>
-					<input type="text" className="search"
-						ref="search"
-						onChange={this.onChangeText.bind(this)}
-						placeholder="Search here"
-					/>
+				<div className="top">
+					<div className="header" onClick={this.clearSearchQuery.bind(this)}>
+						Users ({this.state.resultsCount})
+					</div>
+					
+					<div>
+						<input type="text" className="search"
+							ref="search"
+							onChange={this.onChangeText.bind(this)}
+							placeholder="Search here"
+						/>
+					</div>
 				</div>
 				
 				{loading}
 				
-				<div onScroll={this.handleScroll.bind(this)} className="showMessages">
+				<div onScroll={this.handleScroll.bind(this)} 
+					className="middle">
 					{this.makeItems()}
 				</div>
 									
-				<div className="showButtons">
+				<div className="bottom">
 					<center>
 					<hr/>
 					{errorCtrl}

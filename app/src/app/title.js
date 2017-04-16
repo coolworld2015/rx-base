@@ -18,9 +18,7 @@ class Title extends Component {
 				<center>
 				<div className="brandname">RX-Base</div>
 				<div>
-					<br/>
 					<img src="./logo.jpg" onClick={this.goToMain.bind(this)} className="logo"/>
-					<hr/>
 				</div>
 				</center>
             </div>

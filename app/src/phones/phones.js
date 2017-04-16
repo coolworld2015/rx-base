@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {hashHistory} from 'react-router';
 import ListItem from './listItem';
 import Title from '../app/title';
+import NoImgTitle from '../app/noImgTitle';
 
 class Phones extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Phones extends Component {
             items: appConfig.phones.items.slice(0, 20),
 			filteredItems: appConfig.phones.items,
 			resultsCount: 0,
-            recordsCount: 25,
+            recordsCount: 20,
             positionY: 0
         };
     }
@@ -29,7 +30,7 @@ class Phones extends Component {
 	}
 	
 	handleScroll() {
-		var position = document.querySelector('.showMessages').scrollTop;
+		var position = document.querySelector('.middle').scrollTop;
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount;
         positionY = this.state.positionY;
@@ -40,8 +41,8 @@ class Phones extends Component {
 			console.log(position);
             this.setState({
                 items: items,
-                recordsCount: recordsCount + 20,
-                positionY: positionY + 1000
+                recordsCount: recordsCount + 10,
+                positionY: positionY + 500
             });
         }
 	}
@@ -51,7 +52,7 @@ class Phones extends Component {
         var arr = [].concat(appConfig.phones.items);
         var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
         this.setState({
-            items: items.slice(0, 25),
+            items: items.slice(0, 20),
             resultsCount: items.length,
             filteredItems: items,
             searchQuery: text
@@ -61,11 +62,11 @@ class Phones extends Component {
 	clearSearchQuery() {
 		this.refs.search.value = '';
 		this.setState({
-			items: appConfig.phones.items.slice(0, 25),
+			items: appConfig.phones.items.slice(0, 20),
             resultsCount: appConfig.phones.items.length,
             filteredItems: appConfig.phones.items,
 			positionY: 0,
-			recordsCount: 25
+			recordsCount: 20
 		});
 	}
 	
@@ -156,27 +157,28 @@ class Phones extends Component {
 		
         return (
             <div>
-				<Title/>
-				
-                <div className="header" onClick={this.clearSearchQuery.bind(this)}>
-					Phones ({this.state.resultsCount})
-				</div>
-				
-				<div>
-					<input type="text" className="search"
-						ref="search"
-						onChange={this.onChangeText.bind(this)}
-						placeholder="Search here"
-					/>
+				<div className="top">					
+					<div className="header" onClick={this.clearSearchQuery.bind(this)}>
+						Phones ({this.state.resultsCount})
+					</div>
+					
+					<div>
+						<input type="text" className="search"
+							ref="search"
+							onChange={this.onChangeText.bind(this)}
+							placeholder="Search here"
+						/>
+					</div>
 				</div>
 				
 				{loading}
 				
-				<div onScroll={this.handleScroll.bind(this)} className="showMessages">
+				<div onScroll={this.handleScroll.bind(this)} 
+					className="middle">
 					{this.makeItems()}
 				</div>
 									
-				<div className="showButtons">
+				<div className="bottom">
 					<center>
 					<hr/>
 					{errorCtrl}

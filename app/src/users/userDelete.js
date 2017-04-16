@@ -63,10 +63,14 @@ class UserDelete extends Component {
 		
         return (
 			<div>
-				<Title/>
-			
 				<center>
+				<div className="header">
+					Delete
+				</div>
+				<hr/>
 				<br/>
+ 
+				
 				<div className="brandname">
 					<br/>
 						Are you sure you want to delete {this.props.routeParams.name}?
