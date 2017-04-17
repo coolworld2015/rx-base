@@ -29,7 +29,7 @@ class Users extends Component {
 	}
 	
 	handleScroll() {
-		var position = document.querySelector('.showMessages').scrollTop;
+		var position = document.querySelector('.middle').scrollTop;
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount;
         positionY = this.state.positionY;
