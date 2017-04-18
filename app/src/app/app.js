@@ -9,33 +9,33 @@ class App extends Component {
         this.state = {
             showProgress: false,
             isLoggedIn: false
-        }
-		
-		window.appConfig = {
+        };
+
+        window.appConfig = {
             access_token: '',
-			url: 'http://jwt-base.herokuapp.com/',
-			onLogOut: this.onLogOut.bind(this),
-			search: {
+            url: 'http://jwt-base.herokuapp.com/',
+            onLogOut: this.onLogOut.bind(this),
+            search: {
                 refresh: true,
-				items: [],
-				item: {}
-            },			
-			users: {
-                refresh: true,
-				items: [],
-				item: {}
+                items: [],
+                item: {}
             },
-			phones: {
+            users: {
                 refresh: true,
-				items: [],
-				item: {}
+                items: [],
+                item: {}
             },
-			audit: {
-				refresh: true,
-				items: [],
-				item: {}
-            },			
-			socket: {
+            phones: {
+                refresh: true,
+                items: [],
+                item: {}
+            },
+            audit: {
+                refresh: true,
+                items: [],
+                item: {}
+            },
+            socket: {
                 name: ''
             }
         };
@@ -45,16 +45,16 @@ class App extends Component {
         console.log('onLogin');
         this.setState({isLoggedIn: true});
     }
-    
-	onLogOut() {
+
+    onLogOut() {
         console.log('onLogOut');
         this.setState({isLoggedIn: false});
     }
-	
+
     render() {
         if (this.state.isLoggedIn) {
             return (
-				<AppContainer onLogOut={this.onLogOut.bind(this)}/>
+                <AppContainer onLogOut={this.onLogOut.bind(this)}/>
             )
         } else {
             return (
