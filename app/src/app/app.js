@@ -54,7 +54,7 @@ class App extends Component {
     render() {
         if (this.state.isLoggedIn) {
             return (
-                <AppContainer onLogOut={this.onLogOut.bind(this)}/>
+                <AppContainer />
             )
         } else {
             return (
