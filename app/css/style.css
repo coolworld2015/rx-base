@@ -24,9 +24,24 @@ body {
 	height: 600px;
 }
 
+.middle-menu {
+	text-align: center;
+    margin-top: 50px;
+	margin-bottom: 30px;
+	overflow-y: scroll;
+	height: 600px;
+}
+
 .bottom {
 	position: fixed;
 	bottom: 0px;
+	width: 100%;
+	background-color: black;
+}
+
+.bottom-menu {
+	position: fixed;
+	bottom: 10px;
 	width: 100%;
 	background-color: black;
 }
@@ -202,18 +217,16 @@ body {
 }
 
 .textarea {
-	text-align: center;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 20px;
     color: white;
-    color: black;
-    background-color: cadetblue;
-    background-color: white;
+    background-color: black;
     border-style: none;
-	width: 96%;
-	height: 35px;
-	margin: 10px 0 5px 10px;
-	padding-top: 12px;
+	width: 98%;
+	height: 75px;
+	margin-top: 10px;
+	padding-left: 5px;
+	font-family: Arial;
 }
 
 .span {
@@ -279,6 +292,16 @@ button:hover {
     font-weight: bold;
     border: black;
     cursor: pointer;
+}
+
+.items-menu {
+    color: white;
+    background-color: black;
+    font-size: 24px;
+    font-weight: bold;
+    border: black;
+    cursor: pointer;
+	margin: 15px;
 }
 
 .logo {

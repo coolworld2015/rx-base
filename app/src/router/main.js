@@ -33,22 +33,20 @@ class Main extends Component {
     render() {
 		return (
 			<div>
-				<center>
-				<div className="header">
-					RX-Base
+				<div className="top">
+					<div className="header">
+						RX-Base
+					</div>
 				</div>
-
-				<div>
-					<hr/><br/>
-					<div onClick={this.goSearch.bind(this)} className="items">Search</div><br/>
-					<div onClick={this.goPhones.bind(this)} className="items">Phones</div><br/>
-					<div onClick={this.goUsers.bind(this)} className="items">Users</div><br/>
-					<div onClick={this.goAudit.bind(this)} className="items">Audit</div><br/>
-					<div onClick={this.onLogOut.bind(this)} className="items">Logout</div>
-					<br/><hr/>
+				
+				<div className="middle-menu">
+					<hr/>
+					<div onClick={this.goSearch.bind(this)} className="items-menu">Search</div><hr/>
+					<div onClick={this.goPhones.bind(this)} className="items-menu">Phones</div><hr/>
+					<div onClick={this.goUsers.bind(this)} className="items-menu">Users</div><hr/>
+					<div onClick={this.goAudit.bind(this)} className="items-menu">Audit</div><hr/>
+					<div onClick={this.onLogOut.bind(this)} className="items-menu">Logout</div><hr/>
 				</div>
- 
-				</center>
 			</div>
 		)
     }
