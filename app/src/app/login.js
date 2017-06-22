@@ -9,14 +9,14 @@ class Login extends Component {
 		
 		this.state = {
             showProgress: false,
-            username: '1',
-            password: '1'
+            username: '',
+            password: ''
         }
     }
 	
 	componentDidMount() {
-		this.refs.username.value = '1';
-		this.refs.password.value = '1';
+		this.refs.username.value = '';
+		this.refs.password.value = '';
 	}
 	
     onLogin() {
@@ -47,7 +47,7 @@ class Login extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
                 if (responseData.token) {
-					appConfig.access_token = responseData.token;		
+					appConfig.access_token = responseData.token;					
                     this.setState({
                         badCredentials: false
                     });
@@ -112,7 +112,7 @@ class Login extends Component {
 							ref="username"
 							onChange={(event) => {
 								this.setState({
-									name: event.target.value,
+									username: event.target.value,
 								})
 							}}
 							placeholder="Login"/>
